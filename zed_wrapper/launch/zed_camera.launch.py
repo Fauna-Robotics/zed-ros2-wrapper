@@ -191,7 +191,8 @@ def launch_setup(context, *args, **kwargs):
     # ZED Wrapper node
     zed_wrapper_node = Node(
         package='zed_wrapper',
-        namespace=camera_name_val,
+        # MODIFIED: remove namespace for topics
+        # namespace=camera_name_val,
         executable='zed_wrapper',
         name=node_name,
         output='screen',

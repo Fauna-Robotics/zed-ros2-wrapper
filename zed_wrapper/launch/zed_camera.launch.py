@@ -83,7 +83,7 @@ def launch_setup(context, *args, **kwargs):
 
     config_common_path = LaunchConfiguration('config_path')
     # MODIFIED: allow for multiple user-supplied config files
-    config_common_path = parse_array_param(config_common_path)
+    config_common_path = parse_array_param(config_common_path.perform(context))
     config_ffmpeg = LaunchConfiguration('ffmpeg_config_path')
 
     serial_number = LaunchConfiguration('serial_number')

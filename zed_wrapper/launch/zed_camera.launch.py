@@ -82,6 +82,8 @@ def launch_setup(context, *args, **kwargs):
     node_name = LaunchConfiguration('node_name')
 
     config_common_path = LaunchConfiguration('config_path')
+    # MODIFIED: allow for multiple user-supplied config files
+    config_common_path = parse_array_param(config_common_path.perform(context))
     config_ffmpeg = LaunchConfiguration('ffmpeg_config_path')
 
     serial_number = LaunchConfiguration('serial_number')
@@ -163,9 +165,11 @@ def launch_setup(context, *args, **kwargs):
 
     node_parameters = [
             # YAML files
-            config_common_path,  # Common parameters
             config_camera_path,  # Camera related parameters
             config_ffmpeg, # FFMPEG parameters
+
+            # MODIFIED: allow for multiple user-supplied config files
+            *config_common_path,  # Common parameters
             # Overriding
             {
                 'use_sim_time': use_sim_time,
